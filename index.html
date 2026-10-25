@@ -72,7 +72,12 @@
     const words = ["我爱你 💕", "你最可爱啦 🌷", "今天也要开心哦 ☀️", "么么哒 😘", "我们一直在一起 💞"];
     const tip = document.createElement("div");
     tip.textContent = words[Math.floor(Math.random() * words.length)];
-    tip.style.cssText = "position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) scale(1);font-size:28px;color:#ff7aa0;font-weight:bold;z-index:99;animation:pop .8s ease;pointer-events:none;";
+    // 在整个页面范围内随机位置出现
+    const x = 8 + Math.random() * 76;
+    const y = 12 + Math.random() * 70;
+    tip.style.cssText =
+      "position:fixed;left:" + x + "vw;top:" + y + "vh;transform:translate(-50%,-50%) scale(1);" +
+      "font-size:28px;color:#ff7aa0;font-weight:bold;z-index:99;animation:pop .8s ease;pointer-events:none;";
     document.body.appendChild(tip);
     setTimeout(() => tip.remove(), 900);
   }
