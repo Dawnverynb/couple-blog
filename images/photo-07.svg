@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff3c2"/><stop offset="1" stop-color="#fffaea"/>
+  </linearGradient></defs>
+  <rect width="600" height="600" fill="url(#g7)"/>
+  <path d="M300 210 C 250 160, 175 180, 175 250 C 175 320, 300 370, 300 370 C 300 370, 425 320, 425 250 C 425 180, 350 160, 300 210 Z" fill="#ff9bb3" opacity="0.85"/>
+  <text x="300" y="470" font-size="40" fill="#c4587a" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">照片 07</text>
+</svg>
