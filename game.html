@@ -40,22 +40,28 @@
     cursor: pointer;
     user-select: none;
     line-height: 1;
-    animation: heartIn 0.25s ease, heartFloat 1.1s ease-in-out infinite alternate;
-    transition: transform 0.12s ease;
+    animation: heartIn 0.7s ease-out, heartFloat 2.6s ease-in-out infinite alternate;
+    transition: transform 0.2s ease;
   }
   .heart:hover { transform: scale(1.15); }
-  .heart.clicked { animation: heartOut 0.2s ease forwards; }
+  .heart.clicked { animation: heartOut 0.5s ease forwards; }
+  .heart.leaving {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
   @keyframes heartIn {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
+    0% { transform: scale(0); opacity: 0; }
+    60% { opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
   }
   @keyframes heartFloat {
     from { margin-top: 0; }
-    to   { margin-top: -8px; }
+    to   { margin-top: -10px; }
   }
   @keyframes heartOut {
     0%   { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 0; }
   }
 
   .result-score { font-size: 22px; color: var(--pink-text); margin-bottom: 10px; }
