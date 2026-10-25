@@ -4,167 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>我们的情侣空间</title>
-<style>
-  :root {
-    --pink-soft: #ffe3ec;
-    --pink-bg: #fff0f5;
-    --pink-deep: #ff9bb3;
-    --pink-text: #c4587a;
-    --star: #ffd86b;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
-    background: linear-gradient(160deg, var(--pink-bg) 0%, var(--pink-soft) 100%);
-    color: var(--pink-text);
-    overflow-x: hidden;
-    position: relative;
-  }
-  /* 漂浮的爱心与星星 */
-  .deco {
-    position: fixed;
-    top: -10%;
-    font-size: 24px;
-    opacity: 0.8;
-    animation: float linear infinite;
-    user-select: none;
-    pointer-events: none;
-    z-index: 0;
-  }
-  @keyframes float {
-    0%   { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(120vh) rotate(360deg); }
-  }
-  .wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 70px 24px 60px;
-    text-align: center;
-  }
-  .heart-big {
-    font-size: 56px;
-    animation: beat 1.2s ease-in-out infinite;
-  }
-  @keyframes beat {
-    0%, 100% { transform: scale(1); }
-    50%      { transform: scale(1.15); }
-  }
-  @keyframes pop {
-    0%   { transform: translate(-50%,-50%) scale(0.4); opacity: 0; }
-    40%  { transform: translate(-50%,-50%) scale(1.1); opacity: 1; }
-    100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-  }
-  h1 {
-    font-size: 40px;
-    margin: 16px 0 8px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0 #fff;
-  }
-  .subtitle {
-    font-size: 16px;
-    color: var(--pink-deep);
-    margin-bottom: 28px;
-  }
-  .card {
-    background: rgba(255, 255, 255, 0.7);
-    border: 2px dashed var(--pink-deep);
-    border-radius: 24px;
-    padding: 28px 24px;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 10px 30px rgba(255, 155, 179, 0.25);
-  }
-  .counter {
-    font-size: 18px;
-    line-height: 1.9;
-  }
-  .counter .num {
-    font-size: 34px;
-    font-weight: bold;
-    color: var(--pink-deep);
-  }
-  .stars-line { margin: 18px 0; font-size: 22px; letter-spacing: 6px; }
-  .footer {
-    margin-top: 32px;
-    font-size: 13px;
-    color: var(--pink-deep);
-    opacity: 0.8;
-  }
-  .btn {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 12px 28px;
-    background: var(--pink-deep);
-    color: #fff;
-    border: none;
-    border-radius: 999px;
-    font-size: 15px;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 6px 16px rgba(255, 155, 179, 0.5);
-    transition: transform .2s ease;
-  }
-  .btn:hover { transform: translateY(-3px); }
-</style>
+<link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 
-<!-- 漂浮装饰：爱心与星星 -->
 <div id="decoLayer"></div>
 
-<div class="wrap">
-  <div class="heart-big">💗</div>
-  <h1>我们的情侣空间</h1>
-  <p class="subtitle">✨ 记录我们在一起的点点滴滴 ✨</p>
+<nav class="navbar">
+  <a class="active" href="index.html">首页</a>
+  <a href="photos.html">照片墙</a>
+  <a href="letters.html">情书</a>
+</nav>
 
-  <div class="card">
-    <div class="stars-line">⭐ 💕 ⭐ 💕 ⭐</div>
-    <div class="counter">
+<div class="page" style="text-align:center; padding-top:50px;">
+  <div style="font-size:56px; animation:beat 1.2s ease-in-out infinite;">💗</div>
+  <h1 class="section-title">我们的情侣空间</h1>
+  <p class="section-sub">✨ 记录我们在一起的点点滴滴 ✨</p>
+
+  <div style="background:rgba(255,255,255,.7); border:2px dashed var(--pink-deep); border-radius:24px; padding:28px 24px; max-width:520px; margin:0 auto; box-shadow:0 10px 30px rgba(255,155,179,.25);">
+    <div style="font-size:22px; letter-spacing:6px; margin:8px 0;">⭐ 💕 ⭐ 💕 ⭐</div>
+    <div style="font-size:18px; line-height:1.9;">
       我们已经相恋
-      <div><span class="num" id="days">0</span> 天</div>
+      <div><span style="font-size:34px; font-weight:bold; color:var(--pink-deep);" id="days">0</span> 天</div>
       每一天都值得被收藏 🌸
     </div>
-    <div class="stars-line">🌟 💖 🌟 💖 🌟</div>
+    <div style="font-size:22px; letter-spacing:6px; margin:8px 0;">🌟 💖 🌟 💖 🌟</div>
     <a class="btn" href="#" onclick="sayLove();return false;">点我一下 💞</a>
   </div>
 
   <p class="footer">Made with 💗 for us · GitHub Pages</p>
 </div>
 
+<script src="js/deco.js"></script>
 <script>
-  // 在一起纪念日（可自行修改）
+  // 在一起纪念日（改成你们的真实日期即可）
   const startDay = new Date("2024-02-14");
   function updateDays() {
-    const now = new Date();
-    const diff = Math.floor((now - startDay) / (1000 * 60 * 60 * 24));
+    const diff = Math.floor((Date.now() - startDay) / 86400000);
     document.getElementById("days").textContent = Math.max(diff, 0);
   }
   updateDays();
 
   function sayLove() {
     const words = ["我爱你 💕", "你最可爱啦 🌷", "今天也要开心哦 ☀️", "么么哒 😘", "我们一直在一起 💞"];
-    const msg = words[Math.floor(Math.random() * words.length)];
     const tip = document.createElement("div");
-    tip.textContent = msg;
+    tip.textContent = words[Math.floor(Math.random() * words.length)];
     tip.style.cssText = "position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) scale(1);font-size:28px;color:#ff7aa0;font-weight:bold;z-index:99;animation:pop .8s ease;pointer-events:none;";
     document.body.appendChild(tip);
     setTimeout(() => tip.remove(), 900);
-  }
-
-  // 生成漂浮的爱心和星星
-  const symbols = ["💗", "💕", "💖", "⭐", "🌟", "✨", "🌸", "🐰"];
-  const layer = document.getElementById("decoLayer");
-  for (let i = 0; i < 18; i++) {
-    const s = document.createElement("div");
-    s.className = "deco";
-    s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.fontSize = (16 + Math.random() * 22) + "px";
-    s.style.animationDuration = (8 + Math.random() * 10) + "s";
-    s.style.animationDelay = (-Math.random() * 15) + "s";
-    layer.appendChild(s);
   }
 </script>
 </body>
