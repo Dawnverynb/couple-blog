@@ -41,10 +41,13 @@ function spawnHeart() {
     heart.classList.add("clicked");
     setTimeout(() => heart.remove(), 200);
   });
-  // 没点中也会自动消失，避免堆满屏幕
+  // 没点中也会柔和淡出后消失，避免堆满屏幕
   setTimeout(() => {
-    if (!clicked) heart.remove();
-  }, 1100);
+    if (!clicked) {
+      heart.classList.add("leaving");
+      setTimeout(() => heart.remove(), 500);
+    }
+  }, 1600);
   playArea.appendChild(heart);
 }
 
