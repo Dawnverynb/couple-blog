@@ -14,6 +14,7 @@
   <a class="active" href="index.html">首页</a>
   <a href="photos.html">照片墙</a>
   <a href="letters.html">情书</a>
+  <a href="game.html">小游戏</a>
 </nav>
 
 <div class="page" style="text-align:center; padding-top:50px;">
@@ -32,6 +33,14 @@
     <a class="btn" href="#" onclick="sayLove();return false;">点我一下 💞</a>
   </div>
 
+  <!-- 纪念日倒计时模块 -->
+  <section class="milestone">
+    <h2 class="section-title" style="font-size:24px; margin-top:0;">💞 我们的纪念日</h2>
+    <div class="days-big" id="daysBig">0</div>
+    <div class="days-label">我们已经在一起这么久啦</div>
+    <div class="countdown">距离下一个纪念日还有 <b id="nextDays">0</b> 天 🎉</div>
+  </section>
+
   <p class="footer">Made with 💗 for us · GitHub Pages</p>
 </div>
 
@@ -39,11 +48,25 @@
 <script>
   // 在一起纪念日（改成你们的真实日期即可）
   const startDay = new Date("2024-02-14");
-  function updateDays() {
-    const diff = Math.floor((Date.now() - startDay) / 86400000);
-    document.getElementById("days").textContent = Math.max(diff, 0);
+
+  function daysBetween(a, b) {
+    return Math.floor((b - a) / 86400000);
   }
-  updateDays();
+  function nextAnniversary(from) {
+    const m = startDay.getMonth(), d = startDay.getDate();
+    let y = from.getFullYear();
+    let cand = new Date(y, m, d);
+    if (cand <= from) cand = new Date(y + 1, m, d);
+    return cand;
+  }
+  function updateMilestone() {
+    const now = new Date();
+    document.getElementById("days").textContent = Math.max(daysBetween(startDay, now), 0);
+    document.getElementById("daysBig").textContent = Math.max(daysBetween(startDay, now), 0);
+    document.getElementById("nextDays").textContent = Math.max(daysBetween(now, nextAnniversary(now)), 0);
+  }
+  updateMilestone();
+  setInterval(updateMilestone, 60000);
 
   function sayLove() {
     const words = ["我爱你 💕", "你最可爱啦 🌷", "今天也要开心哦 ☀️", "么么哒 😘", "我们一直在一起 💞"];
