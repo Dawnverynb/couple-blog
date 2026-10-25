@@ -117,3 +117,34 @@ body {
   0%, 100% { transform: scale(1); }
   50%      { transform: scale(1.15); }
 }
+
+/* 纪念日模块 */
+.milestone {
+  text-align: center;
+  margin: 36px auto 0;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px dashed var(--pink-deep);
+  border-radius: 26px;
+  padding: 30px 20px;
+  box-shadow: 0 10px 30px rgba(255, 155, 179, 0.25);
+}
+.milestone .days-big {
+  font-size: 84px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--pink-deep);
+  text-shadow: 3px 3px 0 #fff;
+  background: linear-gradient(180deg, #ff9bb3, #ff6f91);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: beat 1.6s ease-in-out infinite;
+}
+.milestone .days-label { font-size: 17px; color: var(--pink-text); margin-top: 4px; }
+.milestone .countdown {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--pink-deep);
+}
+.milestone .countdown b { font-size: 20px; color: var(--pink-text); }
