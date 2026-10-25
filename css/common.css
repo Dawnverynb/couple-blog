@@ -148,3 +148,39 @@ body {
   color: var(--pink-deep);
 }
 .milestone .countdown b { font-size: 20px; color: var(--pink-text); }
+
+/* 通用模态框（居中 + 自适应屏幕） */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(196, 88, 122, 0.4);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #fff;
+  width: 90%;
+  max-width: 520px;
+  max-height: 82vh;
+  overflow: auto;
+  border-radius: 24px;
+  padding: 30px 28px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(196, 88, 122, 0.45);
+}
+.modal .close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 26px;
+  line-height: 1;
+  border: none;
+  background: none;
+  color: var(--pink-deep);
+  cursor: pointer;
+}
