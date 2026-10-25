@@ -1,0 +1,119 @@
+/* ===== 公共基础样式（情侣空间） ===== */
+:root {
+  --pink-soft: #ffe3ec;
+  --pink-bg: #fff0f5;
+  --pink-deep: #ff9bb3;
+  --pink-text: #c4587a;
+  --pink-muted: #7a4a5c;
+  --star: #ffd86b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, var(--pink-bg) 0%, var(--pink-soft) 100%);
+  color: var(--pink-text);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 漂浮装饰层 */
+#decoLayer { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.deco {
+  position: absolute;
+  top: -10%;
+  font-size: 24px;
+  opacity: 0.8;
+  animation: float linear infinite;
+  user-select: none;
+}
+@keyframes float {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(120vh) rotate(360deg); }
+}
+
+/* 页面容器 */
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+
+/* 顶部导航 */
+.navbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 18px 16px 6px;
+}
+.navbar a {
+  text-decoration: none;
+  color: var(--pink-text);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 15px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+.navbar a:hover { border-color: var(--pink-deep); transform: translateY(-2px); }
+.navbar a.active { background: var(--pink-deep); color: #fff; }
+
+/* 页脚 */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--pink-deep);
+  opacity: 0.8;
+}
+
+/* 通用按钮 */
+.btn {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 28px;
+  background: var(--pink-deep);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(255, 155, 179, 0.5);
+  transition: transform 0.2s ease;
+}
+.btn:hover { transform: translateY(-3px); }
+
+/* 区块标题 */
+.section-title {
+  text-align: center;
+  font-size: 28px;
+  margin: 30px 0 6px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #fff;
+}
+.section-sub {
+  text-align: center;
+  font-size: 15px;
+  color: var(--pink-deep);
+  margin-bottom: 26px;
+}
+
+@keyframes pop {
+  0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  40%  { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.15); }
+}
