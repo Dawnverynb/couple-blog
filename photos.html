@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>照片墙 · 我们的情侣空间</title>
+<link rel="stylesheet" href="css/common.css">
+<style>
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .photo-grid figure {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(255, 155, 179, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in;
+    background: #fff;
+  }
+  .photo-grid figure:hover {
+    transform: scale(1.05);
+    box-shadow: 0 14px 30px rgba(255, 155, 179, 0.45);
+  }
+  .photo-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+  /* 点击放大查看 */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(196, 88, 122, 0.4);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  }
+</style>
+</head>
+<body>
+
+<div id="decoLayer"></div>
+
+<nav class="navbar">
+  <a href="index.html">首页</a>
+  <a class="active" href="photos.html">照片墙</a>
+  <a href="letters.html">情书</a>
+</nav>
+
+<div class="page">
+  <h2 class="section-title">📷 我们的照片墙</h2>
+  <p class="section-sub">把我们的瞬间都收藏在这里 💕</p>
+
+  <div class="photo-grid" id="photoGrid"></div>
+
+  <p class="footer">把照片放进 images/ 文件夹，再到 js/photos.js 里登记文件名即可～</p>
+</div>
+
+<div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""></div>
+
+<script src="js/deco.js"></script>
+<script src="js/photos.js"></script>
+</body>
+</html>
