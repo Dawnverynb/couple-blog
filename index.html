@@ -50,7 +50,7 @@
 <script src="js/menu.js"></script>
 <script>
   // 在一起纪念日（改成你们的真实日期即可）
-  const startDay = new Date("2024-02-14");
+  const startDay = new Date("2026-10-24");
 
   function daysBetween(a, b) {
     return Math.floor((b - a) / 86400000);
@@ -72,7 +72,7 @@
   setInterval(updateMilestone, 60000);
 
   function sayLove() {
-    const words = ["我爱你 💕", "你最可爱啦 🌷", "今天也要开心哦 ☀️", "么么哒 😘", "我们一直在一起 💞"];
+    const words = ["我一直在", "你最可爱啦 🌷", "要记得按时吃饭哦", "歲歲平安", "今天也要开心哦 ☀️", "我们，岁岁年年", "我们一直在一起 💞"];
     const tip = document.createElement("div");
     tip.textContent = words[Math.floor(Math.random() * words.length)];
     // 在整个页面范围内随机位置出现
