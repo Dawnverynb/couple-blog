@@ -185,21 +185,6 @@ body {
   cursor: pointer;
 }
 
-/* 欢迎语盒子（按时间段显示不同文案；空内容时自动隐藏，避免白条） */
-.greeting-box {
-  max-width: 560px;
-  margin: 16px auto 0;
-  padding: 10px 22px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.85);
-  border: 2px solid var(--pink-deep);
-  border-radius: 999px;
-  color: var(--pink-text);
-  font-size: 16px;
-  box-shadow: 0 6px 16px rgba(255, 155, 179, 0.3);
-}
-.greeting-box:empty { display: none; }
-
 /* 右上角菜单按钮 + 下拉面板 */
 .menu-btn {
   position: fixed;
@@ -250,46 +235,3 @@ body {
 }
 .menu-panel a:hover { background: rgba(255, 155, 179, 0.18); }
 .menu-panel a.active { background: var(--pink-deep); color: #fff; }
-
-/* 登录欢迎模态弹窗 */
-.welcome-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(196, 88, 122, 0.45);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.welcome-overlay.open { opacity: 1; }
-.welcome-card {
-  background: #fff;
-  width: 90%;
-  max-width: 420px;
-  border-radius: 24px;
-  padding: 34px 28px 30px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 24px 60px rgba(196, 88, 122, 0.45);
-  transform: translateY(18px) scale(0.96);
-  transition: transform 0.4s ease;
-}
-.welcome-overlay.open .welcome-card { transform: translateY(0) scale(1); }
-.welcome-close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  border: none;
-  background: none;
-  font-size: 26px;
-  line-height: 1;
-  color: var(--pink-deep);
-  cursor: pointer;
-}
-.welcome-emoji { font-size: 46px; animation: beat 1.6s ease-in-out infinite; }
-.welcome-title { color: var(--pink-text); font-size: 24px; margin: 10px 0 8px; }
-.welcome-text { color: var(--pink-muted); font-size: 16px; line-height: 1.8; margin: 0; }
