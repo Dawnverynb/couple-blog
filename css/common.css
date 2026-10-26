@@ -199,3 +199,97 @@ body {
   box-shadow: 0 6px 16px rgba(255, 155, 179, 0.3);
 }
 .greeting-box:empty { display: none; }
+
+/* 右上角菜单按钮 + 下拉面板 */
+.menu-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--pink-deep);
+  background: #fff;
+  color: var(--pink-deep);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 155, 179, 0.45);
+  transition: transform 0.2s ease;
+}
+.menu-btn:hover { transform: scale(1.08); }
+.menu-panel {
+  position: fixed;
+  top: 74px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #fff;
+  border: 2px solid var(--pink-deep);
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 12px 32px rgba(196, 88, 122, 0.3);
+  transform-origin: top right;
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.menu-panel.open { opacity: 1; transform: scale(1); pointer-events: auto; }
+.menu-panel a {
+  text-decoration: none;
+  color: var(--pink-text);
+  padding: 9px 22px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 15px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.menu-panel a:hover { background: rgba(255, 155, 179, 0.18); }
+.menu-panel a.active { background: var(--pink-deep); color: #fff; }
+
+/* 登录欢迎模态弹窗 */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(196, 88, 122, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.welcome-overlay.open { opacity: 1; }
+.welcome-card {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 24px;
+  padding: 34px 28px 30px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(196, 88, 122, 0.45);
+  transform: translateY(18px) scale(0.96);
+  transition: transform 0.4s ease;
+}
+.welcome-overlay.open .welcome-card { transform: translateY(0) scale(1); }
+.welcome-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: none;
+  background: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--pink-deep);
+  cursor: pointer;
+}
+.welcome-emoji { font-size: 46px; animation: beat 1.6s ease-in-out infinite; }
+.welcome-title { color: var(--pink-text); font-size: 24px; margin: 10px 0 8px; }
+.welcome-text { color: var(--pink-muted); font-size: 16px; line-height: 1.8; margin: 0; }
