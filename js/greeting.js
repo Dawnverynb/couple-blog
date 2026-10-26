@@ -1,17 +1,17 @@
-/* greeting.js — 首页按时段展示的轻量欢迎语提示（完全独立，不依赖 welcome.js 或任何其他脚本）。
+/* greeting.js — 首页按时段展示的轻量欢迎语提示（纯原生 JS，零依赖、零耦合）。
  *
- * 配置说明（见下方 greetingConfig）：
- *   enable  : 是否展示欢迎语，true 才展示
+ * 配置见 greetingConfig：
+ *   enable  : 是否展示
  *   default : 当前小时未匹配到任何时间段时使用的回退文案
- *   duration: 提示自动消失时长（毫秒），可配置；到时自动淡出（无手动关闭）
+ *   duration: 自动消失时长（毫秒），到时向上滑出并移除（无倒计时、无剩余时长提示）
  *   list    : 时间段列表，按 startTime~endTime（含两端，24 小时制）匹配当前小时
  *
  * 行为：
- *   - 仅在首页展示（脚本只挂在首页，并附加 pathname 守卫做双重保险）
- *   - 页面加载后依据当前小时匹配对应欢迎文案；无匹配项回退 default
- *   - 仅 enable 为 true 时展示
- *   - 轻量单行提示：duration 毫秒后自动淡出并移除；无关闭按钮、无手动关闭
- *   - 样式由本文件自行注入，无需 common.css 配合，零耦合
+ *   - 仅在首页展示（脚本只挂首页 + pathname 守卫做双重保险）
+ *   - 从顶部下滑出现，duration 后向上滑出消失，自动从 DOM 移除
+ *   - 同一会话（标签页）仅展示一次，依赖 sessionStorage
+ *   - 尊重 prefers-reduced-motion：关闭位移动画，退化为纯淡入淡出
+ *   - 轻量单行提示，样式由脚本注入 #greetingStyle，无需 common.css
  */
 const greetingConfig = {
   enable: true,
@@ -38,22 +38,30 @@ const greetingConfig = {
 };
 
 (function () {
+  const SESSION_KEY = "greetingShown";
+
   function isHome() {
     const p = location.pathname;
     return p === "/" || p.endsWith("/") || p.endsWith("index.html");
   }
-  if (!isHome()) return;
+
+  // 非首页 或 本会话已展示过 → 直接跳过（不渲染、不计时）
+  if (!isHome() || sessionStorage.getItem(SESSION_KEY)) return;
 
   if (!document.getElementById("greetingStyle")) {
     const style = document.createElement("style");
     style.id = "greetingStyle";
     style.textContent =
-      ".greeting-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:200;padding:20px;pointer-events:none;}" +
+      ".greeting-overlay{position:fixed;inset:0;display:flex;align-items:flex-start;justify-content:center;" +
+      "z-index:200;padding:76px 20px 20px;pointer-events:none;}" +
       ".greeting-toast{background:rgba(255,255,255,.96);border:2px solid var(--pink-deep);border-radius:999px;" +
       "padding:12px 26px;color:var(--pink-text);font-size:17px;font-weight:600;line-height:1.4;" +
       "box-shadow:0 10px 30px rgba(196,88,122,.35);max-width:88vw;" +
-      "transform:translateY(14px) scale(.96);opacity:0;transition:opacity .4s ease,transform .4s ease;}" +
-      ".greeting-overlay.open .greeting-toast{opacity:1;transform:translateY(0) scale(1);}";
+      "transform:translateY(-140%);opacity:0;transition:transform .45s ease-out,opacity .45s ease-out;}" +
+      ".greeting-overlay.open .greeting-toast{transform:translateY(0);opacity:1;}" +
+      "@media (prefers-reduced-motion: reduce){" +
+      ".greeting-toast{transition:opacity .25s ease;transform:none;}" +
+      ".greeting-overlay.open .greeting-toast{transform:none;}}";
     document.head.appendChild(style);
   }
 
@@ -78,14 +86,17 @@ const greetingConfig = {
     overlay.appendChild(toast);
     document.body.appendChild(overlay);
 
+    // 标记本会话已展示过（放在真正渲染之后）
+    try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
+
     let closed = false;
     let timer = null;
     function close() {
       if (closed) return;
       closed = true;
       if (timer) clearTimeout(timer);
-      overlay.classList.remove("open");
-      setTimeout(() => overlay.remove(), 450);
+      overlay.classList.remove("open"); // 向上滑出 + 淡出
+      setTimeout(() => overlay.remove(), 500);
     }
 
     requestAnimationFrame(() => overlay.classList.add("open"));
