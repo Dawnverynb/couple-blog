@@ -10,6 +10,7 @@ const photoFiles = [
   "images/photo-07.svg",
   "images/photo-08.svg",
   "images/photo-09.svg",
+  "images/photo-10.png",
 ];
 
 // 图片缺失时的占位（淡粉底 + 提示文字）
