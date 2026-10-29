@@ -72,13 +72,14 @@
   updateMilestone();
   setInterval(updateMilestone, 60000);
 
-  const loveWords = ["我一直在", "你最可爱啦 🌷", "要记得按时吃饭哦", "歲歲平安", "今天也要开心哦 ☀️", "我们，岁岁年年", "我们一直在一起 💞"];
+  const loveWords = ["我一直在","你是唯一","想和你慢慢走","我为你感到骄傲","人生是旷野小宝","你不用一个人抗下所有，我在呢","你的感受很重要，我愿意听","我站在你这边，无条件的","能够遇见你，我很开心","要像今天一样，多多爱自己","我和你万万年","别急，星星也是一点点亮起来的⭐","今天也辛苦啦","一起去看海吧","你已经做得很棒啦，为你点赞","给你一朵小红花","慢慢来，你又不差","好幸运遇见了你","愿有一天，举案齐眉","多幸运，我有个我们","我有一直在想你","天地合乃敢与君绝","你一点都不麻烦","做你的专属受气包","你值得世界上所有的好", "你最可爱啦 🌷", "要记得按时吃饭哦", "歲歲平安", "今天也要开心哦 ☀️", "我们，岁岁年年", "我们一直在一起 💞"];
   let lastLoveIndex = -1;
   function sayLove() {
-    const tip = document.createElement("div");
+    // 不连续重复同一句：随机选取时跳过上一次的那条
     let i;
     do { i = Math.floor(Math.random() * loveWords.length); } while (loveWords.length > 1 && i === lastLoveIndex);
     lastLoveIndex = i;
+    const tip = document.createElement("div");
     tip.textContent = loveWords[i];
     // 在整个页面范围内随机位置出现
     const x = 8 + Math.random() * 76;
