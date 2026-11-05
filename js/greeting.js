@@ -9,7 +9,7 @@
  * 行为：
  *   - 仅在首页展示（脚本只挂首页 + pathname 守卫做双重保险）
  *   - 从顶部下滑出现，duration 后向上滑出消失，自动从 DOM 移除
- *   - 同一会话（标签页）仅展示一次，依赖 sessionStorage
+ *   - 每次页面加载（首次进入 / 刷新）都展示一次
  *   - 尊重 prefers-reduced-motion：关闭位移动画，退化为纯淡入淡出
  *   - 轻量单行提示，样式由脚本注入 #greetingStyle，无需 common.css
  */
@@ -38,15 +38,13 @@ const greetingConfig = {
 };
 
 (function () {
-  const SESSION_KEY = "greetingShown";
-
   function isHome() {
     const p = location.pathname;
     return p === "/" || p.endsWith("/") || p.endsWith("index.html");
   }
 
-  // 非首页 或 本会话已展示过 → 直接跳过（不渲染、不计时）
-  if (!isHome() || sessionStorage.getItem(SESSION_KEY)) return;
+  // 非首页 → 直接跳过（不渲染、不计时）
+  if (!isHome()) return;
 
   if (!document.getElementById("greetingStyle")) {
     const style = document.createElement("style");
@@ -85,9 +83,6 @@ const greetingConfig = {
     toast.textContent = pickGreeting();
     overlay.appendChild(toast);
     document.body.appendChild(overlay);
-
-    // 标记本会话已展示过（放在真正渲染之后）
-    try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) {}
 
     let closed = false;
     let timer = null;
